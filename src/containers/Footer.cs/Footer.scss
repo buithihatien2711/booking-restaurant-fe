@@ -1,0 +1,45 @@
+@import '../../styles/variable';
+
+.footer {
+    background-color: $common-red;
+    color: white;
+
+    .footer-menu {
+        ul {
+            list-style: none;
+            padding-left: 0px;
+
+            li {
+                .icon-footer {
+                    margin-right: 5px;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: white;
+
+                    &:hover {
+                        text-decoration: underline;
+                        transition: $smooth;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer-menu>ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.footer-menu>ul>li>a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-menu>ul>li>a:hover {
+    text-decoration: none;
+    color: var(--green);
+    transition: var(--smooth);
+}

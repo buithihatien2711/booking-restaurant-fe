@@ -1,0 +1,4 @@
+npm i --save sass
+npm install react-bootstrap bootstrap
+npm install @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+npm i axios

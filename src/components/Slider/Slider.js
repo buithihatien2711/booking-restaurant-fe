@@ -1,56 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import RestaurantItem from '../Restaurant/RestaurantItem';
 
-class Slider extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentIndex: 0,
-      images: []
-    };
-  }
-
-  componentDidMount() {
-    let arrImage = [
-      'https://product.hstatic.net/1000275435/product/19649878852941771838_optimized_c11ad126d57340ea9debbba2dc3cd99b_large_4d882479420149c48193a66350e2d3b2_large.jpg',
-      'https://product.hstatic.net/1000275435/product/19649878852941771838_optimized_c11ad126d57340ea9debbba2dc3cd99b_large_4d882479420149c48193a66350e2d3b2_large.jpg',
-      'https://product.hstatic.net/1000275435/product/19649878852941771838_optimized_c11ad126d57340ea9debbba2dc3cd99b_large_4d882479420149c48193a66350e2d3b2_large.jpg',
-      'https://product.hstatic.net/1000275435/product/19649878852941771838_optimized_c11ad126d57340ea9debbba2dc3cd99b_large_4d882479420149c48193a66350e2d3b2_large.jpg',
-      'https://product.hstatic.net/1000275435/product/19649878852941771838_optimized_c11ad126d57340ea9debbba2dc3cd99b_large_4d882479420149c48193a66350e2d3b2_large.jpg'
-    ]
-    this.setState({
-      images: arrImage
-    }
-    )
-  }
-
-  handleNext = () => {
-    const { currentIndex, images } = this.state;
-    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
-    this.setState({ currentIndex: newIndex });
-  };
-
-  handlePrev = () => {
-    const { currentIndex, images } = this.state;
-    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
-    this.setState({ currentIndex: newIndex });
-  };
-
+export class Slider extends Component {
   render() {
-    const { currentIndex, images } = this.state;
-
-    if (images.length === 0) {
-      // Show loading indicator or placeholder while images are being fetched
-      return <div>Loading...</div>;
-    }
+    const responsive = {
+      superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+      },
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+      }
+    };
 
     return (
-      <div className="slider">
-        <button onClick={this.handlePrev}>Prev</button>
-        <img src={images[currentIndex]} alt="Slider" />
-        <button onClick={this.handleNext}>Next</button>
+      <div className='slider container'>
+        <Carousel responsive={responsive}>
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+          <RestaurantItem />
+        </Carousel>
       </div>
-    );
+    )
   }
 }
 
-export default Slider;
+export default Slider

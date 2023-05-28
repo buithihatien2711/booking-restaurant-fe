@@ -1,0 +1,33 @@
+@import '../../styles/variable';
+
+.top-favorite {
+    margin: 10px 0px;
+    .container {
+        .header-favorite {
+            display: flex;
+            justify-content: space-between;
+            .title {
+                font-weight: $title-weight;
+                font-size: $title-size;
+            }
+            .see-more {
+                padding: 10px 0px;
+                a {
+                    text-decoration: none;
+                    color: #000;
+                    font-weight: $bold;
+
+                    &:hover {
+                        color: $common-red;
+                    }
+                }
+            }
+        }
+        .line {
+            margin: 10px 0px;
+            width: 100%;
+            height: 1.5px;
+            background-color: $common-red;
+        }
+    }
+}

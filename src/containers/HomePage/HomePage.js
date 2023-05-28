@@ -12,7 +12,6 @@ class HomePage extends Component {
         <SuitableRestaurant/>
         <Cuisine/>
         <TopFavorite/>
-
       </>
     )
   }

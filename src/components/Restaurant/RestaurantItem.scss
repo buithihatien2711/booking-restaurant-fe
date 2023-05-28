@@ -1,142 +1,44 @@
-a {
-	text-decoration: none;
-	color: #000;
-}
-
 .product-item {
-    width: 318px;
-    height: 450px;
-    margin: 15px 0px;
-    border: none;
-    transition: all .3s;
-    background: #fff;
-    overflow: hidden;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    width: 400px;
+    // height: 450px;
+    padding: 15px;
 
     .product-img {
-        position: relative;
-        margin-bottom: 10px;
-
         a {
-            text-align: left;
-            display: block;
-            overflow: hidden;
-        }
-
-        .product-item-info {
-            bottom: 0px;
-            padding: 15px 0px 5px 0px;
-            opacity: 1;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            min-height: 83px;
-            color: #000;
-            text-align: center;
-
-            .product-title {
-                text-align: left;
-                padding: 0px;
-                line-height: 17px;
-                margin-bottom: 10px;
-
-                a {
-                    word-break: inherit;
-                    height: 24px;
-                    line-height: 27px;
-                    max-width: 100%;
-                    white-space: nowrap;
-                    overflow: hidden !important;
-                    text-overflow: ellipsis;
-                    color: #000;
-                    font-size: 17px;
-                    font-weight: bold;
-                }
-            }
-            .tag-location {
-                padding: 0px;
-                text-align: left;
-                color: #000;
-                white-space: nowrap;
-                overflow: hidden !important;
-                text-overflow: ellipsis;
-                margin-top: 5px;
-                margin-bottom: 5px;
-                font-size: 14px;
-            }
-
-            .product-detail-type {
-                display: flex;
-                justify-content: left;
-                flex-wrap: wrap;
-                margin-bottom: 5px;
-
-                div.product-type {
-                    padding-left: 0px !important;
-                }
-
-                div {
-                    padding: 0px 5px;
-                }
-
-                .product-type-ver2 {
-                    padding-left: 10px;
-                }
-
-                .product-price {
-
-                }
-            }
-
-            .textUudai {
-                color: #d02028;
-                font-size: 17px;
-                font-weight: 700;
-                min-height: 22px;
-            }
-
-            .text-left {
-                text-align: left !important;
+            img {
+                max-width: 100%;
+                height: auto;
             }
         }
     }
-
-    .buy-now-product {
-        .product-schedule-transports {
-            display: none;
-            height: 24px;
-            text-align: center;
-            padding: 0px 10px;
-            margin-bottom: 17px;
-
-            div {
-                font-weight: 700;
-                display: inline-block;
-            }
-
-            .product-schedule {
-                color: #d02028;
-                font-size: 16px;
-                line-height: 27px;
-                margin-top: 6px;
-                text-overflow: ellipsis;
-            }
+    
+    .product-item-info {
+        margin-top: 10px;
+        .product-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .tag-location {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .wapbooking {
-            display: none;
-            margin-bottom: 25px;
-            text-align: center;
+        .product-type-price {
+            display: flex;
+            justify-content: space-between;
 
-            .btn-booking {
-                background: #ffffff;
-                border: 1px solid #0000004a;
-                font-weight: 600;
-            }
-
-            .btn-booking-mb {
-                background: #ffffff;
-                border: 1px solid #0000004a;
-                font-weight: 600;
+            .product-price {
+                color: gray;
+                .product-price-content {
+                    color: #000;
+                }
             }
         }
     }

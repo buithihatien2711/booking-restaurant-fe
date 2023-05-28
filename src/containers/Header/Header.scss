@@ -16,7 +16,7 @@ button {
 
 .header {
     background-color: $common-red;
-    height: 140px;
+    height: 150px;
 
     .for-business {
         display: flex;
@@ -31,6 +31,7 @@ button {
             &:hover {
                 background-color: $common-light-red;
                 transition: $smooth;
+                border-radius: 15px;
             }
         }
     }
@@ -67,6 +68,10 @@ button {
             position: absolute;
             top: 27px;
             z-index: 3;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
     
@@ -80,6 +85,7 @@ button {
             height: 2.5em;
             width: 100px;
             margin-left: 15px;
+            font-weight: $bold;
         }
     }
 }

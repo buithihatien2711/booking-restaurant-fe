@@ -1,0 +1,43 @@
+@import '../../styles/variable';
+
+.suitable-restaurants {
+    .title-container {
+        margin-top: 10px;
+        .title {
+            font-weight:$title-weight;
+            font-size: $title-size;
+        }
+        .line {
+            margin-top: 10px;
+            width: 100%;
+            height: 1.5px;
+            background-color: $common-red;
+        }
+    }
+    .suitability {
+        display: flex;
+        justify-content: space-between;
+        .suitable-item {
+            margin: 20px 20px;
+
+            &:first-child {
+                margin-left: 0px;
+            }
+
+            &:last-child {
+                margin-right: 0px;
+            }
+
+            a {
+                img {
+                    width: 100%;
+                    transition: $smooth;
+                    width: 100%;
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}

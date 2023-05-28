@@ -6,9 +6,10 @@ import HomePage from './HomePage/HomePage';
 import { path } from '../utils/constant';
 import RestaurantItem from '../components/Restaurant/RestaurantItem';
 
+
 function App() {
   return (
-    <>
+    <div className='App'>
       <BrowserRouter>
         <Routes>
           <Route path={path.LOGIN} element={<Login/>}/>
@@ -18,7 +19,7 @@ function App() {
           <Route path='/test' element={<RestaurantItem/>}/>
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,81 @@
+@import '../../styles/variable';
+
+.restaurant-detail {
+    background-color: #cfcfcf;
+    padding: 20px 0px;
+    .container {
+        // width: 70%;
+        // margin: 0 auto;
+        .content {
+            .intro {
+                padding: 20px 20px;
+                border-radius: 7px;
+                background-color: #fff;
+                .restaurant-image {
+                    .main-image {
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 7px;
+                        }
+                    }
+                    .other-image {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px; /* Adjust the desired distance between images */
+                        img {
+                            flex: 1;
+                            // height: 200px;
+                            object-fit: cover;
+                            border-radius: 7px;
+                        }
+                    }
+                }
+                .intro-text {
+                    h4 {
+                        font-weight: $title-weight;
+                    }
+                    .location {
+                        .icon-location {
+                            margin-right: 10px;
+                        }
+                        .line {
+                            margin-top: 10px;
+                            width: 100%;
+                            height: 1.5px;
+                            background-color: $common-light-red;
+                            margin-bottom: 10px;
+                        }
+                    }
+                    .tag {
+                        ul {
+                            display: flex;
+                            padding: 0px;
+                            li {
+                                list-style: none;
+                                margin: 10px 10px;
+                                &:first-child{
+                                    margin-right: 10px;
+                                }
+                                &:first-left{
+                                    margin-right: 10px;
+                                }
+
+                                .tag-item {
+                                    border-style: solid;
+                                    border-color: $common-light-red;
+                                    border-width: 2px;
+                                    padding: 5px 15px;
+                                    border-radius: 20px;
+                                    // background-color: $common-red;
+                                    text-decoration: none;
+                                    color: #000;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

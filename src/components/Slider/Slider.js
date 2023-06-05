@@ -4,6 +4,16 @@ import 'react-multi-carousel/lib/styles.css';
 import RestaurantItem from '../Restaurant/RestaurantItem';
 
 export class Slider extends Component {
+  // state = {
+  //   restaurants : []
+  // }
+
+  // componentDidUpdate() {
+  //   this.setState({
+  //     restaurants : this.props && this.props.restaurants ? this.props.restaurants : null
+  //   })
+  // }
+
   render() {
     const responsive = {
       superLargeDesktop: {
@@ -13,7 +23,7 @@ export class Slider extends Component {
       },
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 3
+        items: 4
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
@@ -26,19 +36,20 @@ export class Slider extends Component {
     };
 
     return (
-      <div className='slider container'>
-        <Carousel responsive={responsive}>
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-        </Carousel>
-      </div>
+      <>
+        {/* {console.log(this.props.restaurants)} */}
+        {/* {console.log('state: ', this.state.restaurants)}
+        {console.log('props', this.props.restaurants)} */}
+        <div className='slider container'>
+          <Carousel responsive={responsive} >
+            {
+              this.props.restaurants.map((restaurant, index) => (
+                <RestaurantItem restaurant = {restaurant} key={restaurant.id}/>
+              ))
+            }
+          </Carousel>
+        </div>
+      </>
     )
   }
 }

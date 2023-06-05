@@ -15,7 +15,8 @@ class Login extends Component {
             phone: '',
             password: '',
             isShowPassword: false,
-            errMessage: ''
+            errMessage: '', 
+            errValid: ''
         }
     }
 
@@ -27,8 +28,25 @@ class Login extends Component {
 
     handleOnClickLogin = async () => {
         this.setState({
-            errMessage: ''
+            errMessage: '',
+            errValid : ''
         })
+
+        if(this.state.phone === '') {
+            this.setState({
+                errValid : 'Số điện thoại không được bỏ trống'
+            })
+        }
+        if(this.state.password === '') {
+            this.setState({
+                errValid : 'Mật khẩu không được bỏ trống'
+            })
+        }
+        if(this.state.phone === '' && this.state.password === '') {
+            this.setState({
+                errValid : 'Số điện thoại và mật khẩu không được bỏ trống'
+            })
+        }
         
         try {
             let res = await handleLoginApi(this.state.phone, this.state.password)
@@ -64,6 +82,9 @@ class Login extends Component {
                 <div className="login-container row">
                     <div className="login-content">
                         <div className='col-12 text-login'>Đăng nhập</div>
+                        <div className='col-12' style={{color:'red'}}>
+                            {this.state.errValid}
+                        </div>
                         <div className='col-12 form-group login-input'>
                             <label>Số điện thoại</label>
                             <input type="text" 

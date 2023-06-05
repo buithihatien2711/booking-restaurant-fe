@@ -1,8 +1,26 @@
 import React, { Component } from 'react'
 import Slider from '../Slider/Slider'
 import './TopFavorite.scss'
+import { handleGetRestaurantApi } from '../../services/restaurantService'
 
 export class TopFavorite extends Component {
+  state = {
+    restaurants : []
+  }
+
+  async componentDidMount() {
+    let filter = 'top-favorite'
+    try {
+      let res = await handleGetRestaurantApi(filter)
+      console.log(res.data.data)
+      this.setState({
+        restaurants : res && res.data && res.data.data ? res.data.data : null
+      })
+    } catch (error) {
+      
+    }
+  }
+
   render() {
     return (
       <div className='top-favorite'>
@@ -20,7 +38,8 @@ export class TopFavorite extends Component {
           <div className='line'>
           </div>
         </div>
-        <Slider/>
+        {/* {console.log(this.state.restaurants)} */}
+        <Slider restaurants = {this.state.restaurants}/>
         
       </div>
     )

@@ -1,7 +1,7 @@
 @import '../../styles/variable';
 
 .restaurant-detail {
-    background-color: #cfcfcf;
+    background-color: #e1e0e0;
     padding: 20px 0px;
     .container {
         // width: 70%;
@@ -70,8 +70,65 @@
                                     // background-color: $common-red;
                                     text-decoration: none;
                                     color: #000;
+
+                                    &:hover {
+                                        background-color: $common-red;
+                                        color: white;
+                                    }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            .description {
+                padding: 45px 20px;
+                border-radius: 7px;
+                background-color: #fff;
+                margin: 25px 0px;
+            }
+            .menu {
+                padding: 70px;
+                border-radius: 7px;
+                background-color: #fff;
+            }
+        }
+        .extra-info {
+            .reservation {
+                padding: 10px 20px;
+                border-radius: 7px;
+                background-color: #fff;
+
+                h4 {
+                    text-align: center;
+                }
+                .reservation {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .btn-reserve {
+                        background-color: $common-red;
+                        color: #fff;
+                        padding: 5px 0px;
+                        width: 100%;
+                        align-self: center;
+                    }
+                }
+            }
+            .adding-info-business-hour {
+                padding: 10px 10px;
+                border-radius: 7px;
+                background-color: #fff;
+                margin: 20px 0px;
+                .business-hour {
+
+                }
+                .adding-info {
+                    .adding-info-item {
+                        color: #d2d2d2;
+
+                        &:active {
+                            color: #000;
                         }
                     }
                 }

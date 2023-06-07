@@ -1,0 +1,50 @@
+.default-slide {
+    .each-slide {  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 90%;
+            height: auto;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.full-screen-slide {
+    position: fixed;
+    padding: 0px 20px;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+
+    .each-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            height: 100vh;
+            width: auto;
+        }
+    }
+
+    .close-slide {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        padding: 15px;
+        background-color: rgba(30,30,30,.6);
+        color: #ccc;
+        font-weight: 900;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

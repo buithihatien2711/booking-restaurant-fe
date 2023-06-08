@@ -4,4 +4,8 @@ const handleGetRestaurantApi = (filter) => {
     return axios.get(`https://localhost:7154/api/Restaurant/collection/${filter}`)
 }
 
-export { handleGetRestaurantApi }
+const handleGetRestaurantDetailApi = (id) => {
+    return axios.get(`https://localhost:7154/api/Restaurant/${id}`)
+}
+
+export { handleGetRestaurantApi, handleGetRestaurantDetailApi }

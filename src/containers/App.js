@@ -6,6 +6,7 @@ import HomePage from './HomePage/HomePage';
 import { path } from '../utils/constant';
 import RestaurantDetail from '../components/Restaurant/RestaurantDetail';
 import NotFound from './NotFound/NotFound';
+import Reservation from '../components/Reservation/Reservation';
 
 function App() {
   return (
@@ -16,8 +17,11 @@ function App() {
           <Route path={path.HOME} element={<Home/>} >
             <Route index element={<HomePage/>} />
           </Route>
-          <Route path='/test' element={<RestaurantDetail/>}/>
           <Route path={path.NOTFOUND} element={<NotFound/>}/>
+          
+          <Route path='/test' element={<RestaurantDetail/>}/>
+          <Route path='/reservation' element={<Reservation/>}/>
+          
         </Routes>
       </BrowserRouter>
     </div>

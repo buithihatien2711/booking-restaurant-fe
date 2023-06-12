@@ -12,37 +12,39 @@ export class AdvanceSearch extends Component {
             <div className="line"></div>
           </div>
           <div className="container">
-            <div className="content">
-              <div className="option-advance-1">
+            {/* <div className="content"> */}
+              <div className="row content">
+              <div className="option-advance-1 col-md-2">
                 <select name="" id="">
                   <option value="city">Tỉnh/Thành</option>
                 </select>
               </div>
-              <div className="option-advance-2">
+              <div className="option-advance-2 col-md-2">
                 <select name="" id="">
                   <option value="district">Quận/Huyện</option>
                 </select>
               </div>
-              <div className="option-advance-3">
+              <div className="option-advance-3 col-md-2">
                 <select name="" id="">
                   <option value="">Khoảng giá</option>
                 </select>
               </div>
-              <div className="option-advance-4">
+              <div className="option-advance-4 col-md-2">
                 <select name="" id="">
                   <option value="">Loại hình ẩm thực</option>
                 </select>
               </div>
-              <div className="option-advance-5">
+              <div className="option-advance-5 col-md-2">
                 <select name="" id="">
                   <option value="">Loại hình phục vụ</option>
                 </select>
               </div>
-              <div className="search-btn">
+              <div className="search-btn col-md-2">
                 <button className="advance-search-btn">Tìm kiếm nhanh</button>
               </div>
+              </div>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </>
     );

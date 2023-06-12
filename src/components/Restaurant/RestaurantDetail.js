@@ -1,148 +1,229 @@
-import React, { Component } from 'react'
-import SlideShow from '../SlideShow/SlideShow'
-import './RestaurantDetail.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import Map from '../Map/Map';
-import { TbMicrophone2 } from 'react-icons/tb';
-import { AiOutlineCar, AiOutlineFundProjectionScreen, AiOutlineWifi, AiOutlineCreditCard } from "react-icons/ai";
+import React, { Component } from "react";
+import SlideShow from "../SlideShow/SlideShow";
+import "./RestaurantDetail.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faL, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import Map from "../Map/Map";
+import { TbMicrophone2 } from "react-icons/tb";
+import {
+  AiOutlineCar,
+  AiOutlineFundProjectionScreen,
+  AiOutlineWifi,
+  AiOutlineCreditCard,
+} from "react-icons/ai";
 import { BsReceipt } from "react-icons/bs";
 import { HiOutlineCake } from "react-icons/hi";
 import { MdOutlineTableBar, MdOutlineMeetingRoom } from "react-icons/md";
 import { GiKidSlide } from "react-icons/gi";
-import { handleGetRestaurantDetailApi } from '../../services/restaurantService'
-import { withRouter } from '../../hoc/withRouter';
-import { path } from '../../utils/constant';
+import { handleGetRestaurantDetailApi } from "../../services/restaurantService";
+import { withRouter } from "../../hoc/withRouter";
+import { path } from "../../utils/constant";
+import { GrLocation } from "react-icons/gr";
+import Reservation from "../Reservation/Reservation";
 
 export class RestaurantDetail extends Component {
   state = {
     restaurant: {},
     businessHours: [],
-  }
+    setIsReservationVisible: true,
+  };
 
   async componentDidMount() {
-    let id = 'e5ade534-0a32-40f1-9187-00cab120bb23'   // Get from url
+    let id = "e5ade534-0a32-40f1-9187-00cab120bb23"; // Get from url
+    // let id = '093111eb-f7df-45b5-b726-15ab5f4bf139'
     try {
-      let res = await handleGetRestaurantDetailApi(id)
+      let res = await handleGetRestaurantDetailApi(id);
       // console.log(res.data.data)
       this.setState({
-        restaurant: res && res.data && res.data.data ? res.data.data : null
-      })
-
-      // console.log(this.state.restaurant)
-      // console.log(res)
-      // const businessHours = this.state.restaurant.businessHourssort((a, b) => a.date - b.date)
-
-      // this.setState({
-      //   businessHours: businessHours
-      // })
-
+        restaurant: res && res.data && res.data.data ? res.data.data : null,
+      });
     } catch (error) {
       // this.props.navigate(path.NOTFOUND)
-      console.log(error)
+      console.log(error);
     }
   }
 
+  onOpenReserve = () => {
+    // alert('onclick reserve');
+    this.setState({
+      setIsReservationVisible: true,
+    });
+  };
+
+  onCloseReserve = () => {
+    this.setState({
+      setIsReservationVisible: false,
+    });
+  };
+
   render() {
-    // { console.log(this.state.restaurant.restaurantImages) }
-    const restaurant = this.state.restaurant
+    const restaurant = this.state.restaurant;
     // {console.log(restaurant)}
     if (!restaurant) {
       // Render loading state or return null
       return <div>Loading...</div>;
-    }
-    else {
-      const restaurantImages = this.state.restaurant.restaurantImages
+    } else {
+      console.log(restaurant);
+      const restaurantImages = this.state.restaurant.restaurantImages;
+      const daysOfWeek = [
+        "Thứ hai",
+        "Thứ ba",
+        "Thứ tư",
+        "Thứ năm",
+        "Thứ sáu",
+        "Thứ bảy",
+        "Chủ nhật",
+      ];
+      const extraServiceDefaults = [
+        { id: 1, name: "Chỗ để xe" },
+        { id: 2, name: "Phòng riêng" },
+        { id: 3, name: "Có xuất hóa đơn" },
+        { id: 4, name: "Karaoke" },
+        { id: 5, name: "Màn chiếu" },
+        { id: 6, name: "Wifi" },
+        { id: 7, name: "Thanh toán thẻ" },
+        { id: 8, name: "Trang trí sự kiện" },
+        { id: 9, name: "Bàn ngoài trời" },
+        { id: 10, name: "Khu vui chơi trẻ em" },
+      ];
+      const iconComponents = {
+        1: <AiOutlineCar />,
+        2: <MdOutlineMeetingRoom />,
+        3: <BsReceipt />,
+        4: <TbMicrophone2 />,
+        5: <AiOutlineFundProjectionScreen />,
+        6: <AiOutlineWifi />,
+        7: <AiOutlineCreditCard />,
+        8: <HiOutlineCake />,
+        9: <MdOutlineTableBar />,
+        10: <GiKidSlide />,
+      };
       return (
-        <div className='restaurant-detail'>
+        <div className="restaurant-detail">
+          {/* <div className="reserve-form">
+            {this.state.setIsReservationVisible && <Reservation onClose={() => this.onCloseReserve(false)}/>}
+          </div> */}
+          {/* {this.state.setIsReservationVisible && <Reservation onClose={() => this.onCloseReserve(false)}/>} */}
+          {this.state.setIsReservationVisible && (
+            <div className="reserve-form">
+              <Reservation onClose={() => this.onCloseReserve(false)} />
+            </div>
+          )}
+
           <div className="container">
             <div className="row">
               <div className="col-md-9 content">
-                <div className='intro'>
+                <div className="intro">
                   <div className="restaurant-image row">
-                    <div className="col-md-10 main-image">
-                      <img src="http://product.hstatic.net/1000275435/product/pato_optimized__1__54cb698423a84f68bed2b3fec78c1413_large.jpg" alt="" />
-                    </div>
-                    <div className="col-md-2 other-image">
-                      <div className="other-image-item">
-                        <img src="http://product.hstatic.net/1000275435/product/heo_dam_nuong_tang-min_d00ed3323bf7425784ff28fdcc2672f3_large.jpg" alt="" />
-                      </div>
-                      <div className="other-image-item">
-                        <img src="http://product.hstatic.net/1000275435/product/140649921_107061864718695_5990799498429482866_n_b09d55226d6f4fecb505e20110fcaba3_large.jpg" alt="" />
-                      </div>
-                      <div className="other-image-item">
-                        <img src="http://product.hstatic.net/1000275435/product/pato_optimized__1__54cb698423a84f68bed2b3fec78c1413_large.jpg" alt="" />
-                      </div>
-                      <div className="other-image-item">
-                        <div className="text-centered">Xem thêm</div>
-                        <div className='photo-overlay'></div>
-                        <img src="http://product.hstatic.net/1000275435/product/111256382_2975506359243019_6241437114968695561_o_d985b96d0d72408aa0cbd9490fa1e246_large.jpg" alt="" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* <div  className="restaurant-image row">
                     {restaurantImages && restaurantImages.length > 0 ? (
-                      <div className="image-container">
-                        {restaurantImages.map((image) => (
-                          <img src={image.url} alt="" key={image.id} />
-                        ))}
-                      </div>
+                      <React.Fragment>
+                        <div className="col-10 main-image">
+                          <img src={restaurantImages[0].url} alt="" />
+                        </div>
+                        <div className="col-2 other-image">
+                          {restaurantImages.slice(1, 4).map((image) => (
+                            <div className="other-image-item" key={image.id}>
+                              <img src={image.url} alt="" />
+                            </div>
+                          ))}
+                          {restaurantImages.length > 4 && (
+                            <div className="other-image-item">
+                              <div className="text-centered">Xem thêm</div>
+                              <div className="photo-overlay"></div>
+                              <img src={restaurantImages[4].url} alt="" />
+                            </div>
+                          )}
+                        </div>
+                      </React.Fragment>
                     ) : (
                       <div>No images available</div>
                     )}
-                  </div> */}
-
+                  </div>
 
                   <div className="intro-text">
                     <h3>{this.state.restaurant.name}</h3>
                     <div className="location">
-                      <span className='icon-location'>
-                        <FontAwesomeIcon icon={faLocationDot} />
+                      <span className="icon-location">
+                        {/* <FontAwesomeIcon icon={faLocationDot} /> */}
+                        <GrLocation />
                       </span>
-                      , P.Trúc Bạch, Hà Nội
-                      <div className='line'></div>
+                      {restaurant.location &&
+                      restaurant.location.address &&
+                      restaurant.location.ward &&
+                      restaurant.location.ward.name &&
+                      restaurant.location.ward.district &&
+                      restaurant.location.ward.district.name &&
+                      restaurant.location.ward.district.city &&
+                      restaurant.location.ward.district.city.name ? (
+                        <>
+                          {restaurant.location.address},{" "}
+                          {restaurant.location.ward.name},{" "}
+                          {restaurant.location.ward.district.name},{" "}
+                          {restaurant.location.ward.district.city.name}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <div className="line"></div>
                     </div>
-                    <div className='tag'>
-                      <ul>
-                        <li>
-                          <a href="/" className='tag-item'>
-                            Món Việt
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/" className='tag-item'>
+                    <div className="tag">
+                      {restaurant && restaurant.services ? (
+                        <>
+                          {restaurant.services.map((service, index) => (
+                            <div className="tag-item" key={service.id}>
+                              <a href={`/collection/cuisine/${service.id}`}>
+                                {service.name}
+                              </a>
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      {restaurant && restaurant.cuisines ? (
+                        <>
+                          {restaurant.cuisines.map((cuisine, index) => (
+                            <div className="tag-item" key={cuisine.id}>
+                              <a href={`/collection/cuisine/${cuisine.id}`}>
+                                {cuisine.name}
+                              </a>
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+
+                      {/* <div className='tag-item'>
+                          <a href="/">
                             Lẩu
                           </a>
 
-                        </li>
-                        <li>
-                          <a href="/" className='tag-item'>
-                            Gọi món
-                          </a>
-                        </li>
-                      </ul>
+                        </div> */}
                     </div>
                   </div>
                 </div>
                 <div className="description">
                   <p>
-                    <strong>* Không gian: </strong> Sức chứa tối đa {this.state.restaurant.capacity} khách&nbsp;
+                    <strong>* Không gian: </strong> Sức chứa tối đa{" "}
+                    {restaurant.capacity} khách&nbsp;
                   </p>
                   <p>
-                    <strong>* Món ăn đặc sắc:</strong> {this.state.restaurant.specialDishes}
+                    <strong>* Món ăn đặc sắc:</strong>{" "}
+                    {restaurant.specialDishes}
                   </p>
                   <p>
                     <strong>* Giới thiệu chung:&nbsp;</strong>
                   </p>
+                  <p>{restaurant.introduction}</p>
                   <p>
-                    {this.state.restaurant.introduction}
+                    <strong>* Lưu ý:</strong>
                   </p>
-                  <p><strong>* Lưu ý:</strong></p>
-                  <p>{this.state.restaurant.note}</p>
+                  <p>{restaurant.note}</p>
                 </div>
                 <div className="menu">
-                  <SlideShow />
+                  {/* {console.log('>>> restaurant detail: ', restaurant.menuImages)} */}
+                  <SlideShow images={restaurant.menuImages} />
                 </div>
                 <div className="map">
                   <Map />
@@ -150,29 +231,44 @@ export class RestaurantDetail extends Component {
               </div>
               <div className="col-md-3 extra-info">
                 <div className="reservation">
-                  <h4>{this.state.restaurant.name}</h4>
+                  <h4>{restaurant.name}</h4>
                   <div className="reservation">
-                    <button className='btn-reserve'> Đặt ngay</button>
+                    <button
+                      className="btn-reserve"
+                      onClick={() => this.onOpenReserve()}
+                    >
+                      {" "}
+                      Đặt ngay
+                    </button>
                   </div>
                 </div>
                 <div className="adding-info-business-hour">
                   <div className="business-hour">
                     <h6>GIỜ HOẠT ĐỘNG</h6>
                     <ul>
-                      <li><span>Thứ hai</span> 10:00 - 21:30</li>
-                      <li><span>Thứ ba</span> 10:00 - 21:30</li>
-                      <li><span>Thứ tư</span> 10:00 - 21:30</li>
-                      <li><span>Thứ năm</span> 10:00 - 21:30</li>
-                      <li><span>Thứ sáu</span> 10:00 - 21:30</li>
-                      <li><span>Thứ bảy</span> 10:00 - 21:30</li>
-                      <li><span>Chủ nhật</span> 10:00 - 21:30</li>
+                      {restaurant.businessHours &&
+                      restaurant.businessHours.length > 0 ? (
+                        restaurant.businessHours
+                          .sort((a, b) => a.date - b.date) // Sort the businessHours array by date
+                          .map((businessHour) => (
+                            <li key={businessHour.id}>
+                              <span className="date-of-week">
+                                {daysOfWeek[businessHour.date]}:{" "}
+                              </span>{" "}
+                              {businessHour.openTime.substring(0, 5)} -{" "}
+                              {businessHour.closeTime.substring(0, 5)}
+                            </li>
+                          ))
+                      ) : (
+                        <div>no available business hour</div>
+                      )}
                     </ul>
                   </div>
                   <div className="adding-info">
                     <h6>THÔNG TIN THÊM</h6>
                     <div className="row">
-                      <div className="col-md-6">
-                        <div className="active">
+                      <div className="col-md-12">
+                        {/* <div className="active">
                           <span style={{ marginRight: "5px" }}> <AiOutlineCar /></span>
                           Chỗ đỗ xe
                         </div>
@@ -191,9 +287,36 @@ export class RestaurantDetail extends Component {
                         <div className="adding-info-item">
                           <span style={{ marginRight: "5px" }}><AiOutlineFundProjectionScreen /></span>
                           Màn chiếu
-                        </div>
+                        </div> */}
+                        {restaurant && restaurant.extraServices ? (
+                          <>
+                            {extraServiceDefaults.map(
+                              (extraServiceDefault, index) => (
+                                <div
+                                  className={
+                                    restaurant.extraServices.some(
+                                      (item) =>
+                                        item.id === extraServiceDefault.id
+                                    )
+                                      ? "active"
+                                      : "adding-info-item"
+                                  }
+                                  key={extraServiceDefault.id}
+                                >
+                                  {/* {console.log(restaurant.extraServices.some(item => extraServiceDefault.some(obj => obj.id === item.id)))} */}
+                                  <span style={{ marginRight: "5px" }}>
+                                    {iconComponents[extraServiceDefault.id]}
+                                  </span>
+                                  {extraServiceDefault.name}
+                                </div>
+                              )
+                            )}
+                          </>
+                        ) : (
+                          <></>
+                        )}
                       </div>
-                      <div className="col-md-6">
+                      {/* <div className="col-md-6">
                         <div className="adding-info-item">
                           <span style={{ marginRight: "5px" }}><AiOutlineWifi /></span>
                           Wifi
@@ -214,7 +337,7 @@ export class RestaurantDetail extends Component {
                           <span style={{ marginRight: "5px" }}><GiKidSlide /></span>
                           Khu vui chơi trẻ em
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -222,9 +345,9 @@ export class RestaurantDetail extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     }
   }
 }
 
-export default withRouter(RestaurantDetail)
+export default withRouter(RestaurantDetail);

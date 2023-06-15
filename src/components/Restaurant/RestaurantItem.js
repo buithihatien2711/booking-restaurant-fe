@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './RestaurantItem.scss'
+import { withRouter } from '../../hoc/withRouter'
+import { Link } from 'react-router-dom'
 
-export class RestaurantItem extends Component {
+class RestaurantItem extends Component {
     // state = {
     //     restaurant : {}
     // }
@@ -11,26 +13,30 @@ export class RestaurantItem extends Component {
     //       restaurant : this.props && this.props.restaurant ? this.props.restaurant : null
     //     })
     //   }
-
     render() {
         let restaurant = this.props.restaurant
         
         return (
             <div className="product-item ">
                 <div className="product-img">
-                    <a href="/">
+                    <Link to={`/restaurants/${restaurant.id}`}>
                         <img id="" className=" "
                             src={restaurant.image}
-                            alt="Hải sản Biển Đông - Trần Thái Tông" />
-                    </a>
+                            alt={restaurant.name} />
+                    </Link>
+                    {/* <a href={}>
+                        <img id="" className=" "
+                            src={restaurant.image}
+                            alt={restaurant.name} />
+                    </a> */}
                 </div>
                 <div className="product-item-info">
                     <div className="product-title">
-                        <a href="/">{restaurant.name}</a>
+                        <Link to={`/restaurants/${restaurant.id}`}>{restaurant.name}</Link>
                     </div>
                     <div className="tag-location">
                         {/* {console.log(restaurant)} */}
-                        {restaurant.location.address}, P.{restaurant.location.ward.name}, Q.{restaurant.location.ward.district.name}, {restaurant.location.ward.district.city.name}
+                        {restaurant.location.address}, P.{restaurant.ward.name}, Q.{restaurant.district.name}, {restaurant.city.name}
                     </div>
                     <div className="product-type-price">
                         <div className="product-type">
@@ -44,8 +50,8 @@ export class RestaurantItem extends Component {
                             </span>
                         </div>
                         <div className="product-price">
-                            <span className="product-price-content">{Array(restaurant.priceRange + 1).fill('$').join('')}</span>
-                            <span>{Array(5 - restaurant.priceRange - 1).fill('$').join('')}</span>
+                            <span className="product-price-content">{Array(restaurant.priceRange).fill('$').join('')}</span>
+                            <span>{Array(5 - restaurant.priceRange).fill('$').join('')}</span>
                         </div>
                     </div>
                     {/* <div class="textUudai text-left">
@@ -57,7 +63,7 @@ export class RestaurantItem extends Component {
     }
 }
 
-export default RestaurantItem
+export default withRouter(RestaurantItem)
 
 
 // export className RestaurantItem extends Component {

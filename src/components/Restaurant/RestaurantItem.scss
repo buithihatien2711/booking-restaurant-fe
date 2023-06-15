@@ -20,6 +20,12 @@
         .product-title {
             font-size: 18px;
             font-weight: 700;
+
+            a {
+                &:hover {
+                    color: #000;
+                }
+            }
         }
         
         .tag-location {

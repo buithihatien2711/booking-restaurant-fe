@@ -20,26 +20,39 @@ import { withRouter } from "../../hoc/withRouter";
 import { path } from "../../utils/constant";
 import { GrLocation } from "react-icons/gr";
 import Reservation from "../Reservation/Reservation";
+import Login from "../../containers/Auth/Login";
 
-export class RestaurantDetail extends Component {
+class RestaurantDetail extends Component {
   state = {
     restaurant: {},
     businessHours: [],
-    setIsReservationVisible: true,
+    setIsReservationVisible: false,
+    isLogin: false,
   };
-
+  
   async componentDidMount() {
-    let id = "e5ade534-0a32-40f1-9187-00cab120bb23"; // Get from url
+    window.scrollTo(0, 0);
+    // let id = "e5ade534-0a32-40f1-9187-00cab120bb23"; // Get from url
     // let id = '093111eb-f7df-45b5-b726-15ab5f4bf139'
-    try {
-      let res = await handleGetRestaurantDetailApi(id);
-      // console.log(res.data.data)
+    console.log('restaurant detail: ', this.props)
+    if (this.props.params && this.props.params.id) {
+      // console.log('restaurant detail: ', this.props)
+      let id = this.props.params.id
+      try {
+        let res = await handleGetRestaurantDetailApi(id);
+        // console.log(res.data.data)
+        this.setState({
+          restaurant: res && res.data && res.data.data ? res.data.data : null,
+        });
+      } catch (error) {
+        this.props.navigate(path.NOTFOUND)
+        // console.log(error);
+      }
+    }
+    if(localStorage.getItem("userToken")){
       this.setState({
-        restaurant: res && res.data && res.data.data ? res.data.data : null,
-      });
-    } catch (error) {
-      // this.props.navigate(path.NOTFOUND)
-      console.log(error);
+        isLogin: true
+      })
     }
   }
 
@@ -99,176 +112,185 @@ export class RestaurantDetail extends Component {
         10: <GiKidSlide />,
       };
       return (
-        <div className="restaurant-detail">
-          {/* <div className="reserve-form">
-            {this.state.setIsReservationVisible && <Reservation onClose={() => this.onCloseReserve(false)}/>}
-          </div> */}
-          {/* {this.state.setIsReservationVisible && <Reservation onClose={() => this.onCloseReserve(false)}/>} */}
-          {this.state.setIsReservationVisible && (
+        <>
+          {this.state.setIsReservationVisible && this.state.isLogin && (
             <div className="reserve-form">
-              <Reservation onClose={() => this.onCloseReserve(false)} />
+              <Reservation onClose={() => this.onCloseReserve()} />
             </div>
           )}
 
-          <div className="container">
-            <div className="row">
-              <div className="col-md-9 content">
-                <div className="intro">
-                  <div className="restaurant-image row">
-                    {restaurantImages && restaurantImages.length > 0 ? (
-                      <React.Fragment>
-                        <div className="col-10 main-image">
-                          <img src={restaurantImages[0].url} alt="" />
-                        </div>
-                        <div className="col-2 other-image">
-                          {restaurantImages.slice(1, 4).map((image) => (
-                            <div className="other-image-item" key={image.id}>
-                              <img src={image.url} alt="" />
-                            </div>
-                          ))}
-                          {restaurantImages.length > 4 && (
-                            <div className="other-image-item">
-                              <div className="text-centered">Xem thêm</div>
-                              <div className="photo-overlay"></div>
-                              <img src={restaurantImages[4].url} alt="" />
-                            </div>
-                          )}
-                        </div>
-                      </React.Fragment>
-                    ) : (
-                      <div>No images available</div>
-                    )}
-                  </div>
+          {this.state.setIsReservationVisible && !this.state.isLogin && (
+            <div className="login-form">
+              <Login  onClose={() => this.onCloseLoginForm()} />
+            </div>
+          )}
 
-                  <div className="intro-text">
-                    <h3>{this.state.restaurant.name}</h3>
-                    <div className="location">
-                      <span className="icon-location">
-                        {/* <FontAwesomeIcon icon={faLocationDot} /> */}
-                        <GrLocation />
-                      </span>
-                      {restaurant.location &&
-                      restaurant.location.address &&
-                      restaurant.location.ward &&
-                      restaurant.location.ward.name &&
-                      restaurant.location.ward.district &&
-                      restaurant.location.ward.district.name &&
-                      restaurant.location.ward.district.city &&
-                      restaurant.location.ward.district.city.name ? (
-                        <>
-                          {restaurant.location.address},{" "}
-                          {restaurant.location.ward.name},{" "}
-                          {restaurant.location.ward.district.name},{" "}
-                          {restaurant.location.ward.district.city.name}
-                        </>
+          <div className="restaurant-detail">
+            {/* {this.state.setIsReservationVisible && (
+            <div className="reserve-form">
+              <Reservation onClose={() => this.onCloseReserve(false)} />
+            </div>
+          )} */}
+
+            <div className="container">
+              <div className="row">
+                <div className="col-md-9 content">
+                  <div className="intro">
+                    <div className="restaurant-image row">
+                      {restaurantImages && restaurantImages.length > 0 ? (
+                        <React.Fragment>
+                          <div className="col-10 main-image">
+                            <img src={restaurantImages[0].url} alt="" />
+                          </div>
+                          <div className="col-2 other-image">
+                            {restaurantImages.slice(1, 4).map((image) => (
+                              <div className="other-image-item" key={image.id}>
+                                <img src={image.url} alt="" />
+                              </div>
+                            ))}
+                            {restaurantImages.length > 4 && (
+                              <div className="other-image-item">
+                                <div className="text-centered">Xem thêm</div>
+                                <div className="photo-overlay"></div>
+                                <img src={restaurantImages[4].url} alt="" />
+                              </div>
+                            )}
+                          </div>
+                        </React.Fragment>
                       ) : (
-                        <></>
+                        <div>No images available</div>
                       )}
-                      <div className="line"></div>
                     </div>
-                    <div className="tag">
-                      {restaurant && restaurant.services ? (
-                        <>
-                          {restaurant.services.map((service, index) => (
-                            <div className="tag-item" key={service.id}>
-                              <a href={`/collection/cuisine/${service.id}`}>
-                                {service.name}
-                              </a>
-                            </div>
-                          ))}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      {restaurant && restaurant.cuisines ? (
-                        <>
-                          {restaurant.cuisines.map((cuisine, index) => (
-                            <div className="tag-item" key={cuisine.id}>
-                              <a href={`/collection/cuisine/${cuisine.id}`}>
-                                {cuisine.name}
-                              </a>
-                            </div>
-                          ))}
-                        </>
-                      ) : (
-                        <></>
-                      )}
 
-                      {/* <div className='tag-item'>
+                    <div className="intro-text">
+                      <h3>{this.state.restaurant.name}</h3>
+                      <div className="location">
+                        <span className="icon-location">
+                          {/* <FontAwesomeIcon icon={faLocationDot} /> */}
+                          <GrLocation />
+                        </span>
+                        {restaurant.location &&
+                        restaurant.location.address &&
+                        restaurant.ward &&
+                        restaurant.ward.name &&
+                        restaurant.district &&
+                        restaurant.district.name &&
+                        restaurant.city &&
+                        restaurant.city.name ? (
+                          <>
+                            {restaurant.location.address},{" "}
+                            {restaurant.ward.name},{" "}
+                            {restaurant.district.name},{" "}
+                            {restaurant.city.name}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                        <div className="line"></div>
+                      </div>
+                      <div className="tag">
+                        {restaurant && restaurant.services ? (
+                          <>
+                            {restaurant.services.map((service, index) => (
+                              <div className="tag-item" key={service.id}>
+                                <a href={`/collection/cuisine/${service.id}`}>
+                                  {service.name}
+                                </a>
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                        {restaurant && restaurant.cuisines ? (
+                          <>
+                            {restaurant.cuisines.map((cuisine, index) => (
+                              <div className="tag-item" key={cuisine.id}>
+                                <a href={`/collection/cuisine/${cuisine.id}`}>
+                                  {cuisine.name}
+                                </a>
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+
+                        {/* <div className='tag-item'>
                           <a href="/">
                             Lẩu
                           </a>
 
                         </div> */}
+                      </div>
                     </div>
                   </div>
+                  <div className="description">
+                    <p>
+                      <strong>* Không gian: </strong> Sức chứa tối đa{" "}
+                      {restaurant.capacity} khách&nbsp;
+                    </p>
+                    <p>
+                      <strong>* Món ăn đặc sắc:</strong>{" "}
+                      {restaurant.specialDishes}
+                    </p>
+                    <p>
+                      <strong>* Giới thiệu chung:&nbsp;</strong>
+                    </p>
+                    <p>{restaurant.introduction}</p>
+                    <p>
+                      <strong>* Lưu ý:</strong>
+                    </p>
+                    <p>{restaurant.note}</p>
+                  </div>
+                  <div className="menu">
+                    {/* {console.log('>>> restaurant detail: ', restaurant.menuImages)} */}
+                    <SlideShow images={restaurant.menuImages} />
+                  </div>
+                  <div className="map">
+                    <Map />
+                  </div>
                 </div>
-                <div className="description">
-                  <p>
-                    <strong>* Không gian: </strong> Sức chứa tối đa{" "}
-                    {restaurant.capacity} khách&nbsp;
-                  </p>
-                  <p>
-                    <strong>* Món ăn đặc sắc:</strong>{" "}
-                    {restaurant.specialDishes}
-                  </p>
-                  <p>
-                    <strong>* Giới thiệu chung:&nbsp;</strong>
-                  </p>
-                  <p>{restaurant.introduction}</p>
-                  <p>
-                    <strong>* Lưu ý:</strong>
-                  </p>
-                  <p>{restaurant.note}</p>
-                </div>
-                <div className="menu">
-                  {/* {console.log('>>> restaurant detail: ', restaurant.menuImages)} */}
-                  <SlideShow images={restaurant.menuImages} />
-                </div>
-                <div className="map">
-                  <Map />
-                </div>
-              </div>
-              <div className="col-md-3 extra-info">
-                <div className="reservation">
-                  <h4>{restaurant.name}</h4>
+                <div className="col-md-3 extra-info">
                   <div className="reservation">
-                    <button
-                      className="btn-reserve"
-                      onClick={() => this.onOpenReserve()}
-                    >
-                      {" "}
-                      Đặt ngay
-                    </button>
+                    <h4>{restaurant.name}</h4>
+                    <div className="reservation">
+                      <button
+                        className="btn-reserve"
+                        onClick={() => this.onOpenReserve()}
+                      >
+                        {" "}
+                        Đặt ngay
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="adding-info-business-hour">
-                  <div className="business-hour">
-                    <h6>GIỜ HOẠT ĐỘNG</h6>
-                    <ul>
-                      {restaurant.businessHours &&
-                      restaurant.businessHours.length > 0 ? (
-                        restaurant.businessHours
-                          .sort((a, b) => a.date - b.date) // Sort the businessHours array by date
-                          .map((businessHour) => (
-                            <li key={businessHour.id}>
-                              <span className="date-of-week">
-                                {daysOfWeek[businessHour.date]}:{" "}
-                              </span>{" "}
-                              {businessHour.openTime.substring(0, 5)} -{" "}
-                              {businessHour.closeTime.substring(0, 5)}
-                            </li>
-                          ))
-                      ) : (
-                        <div>no available business hour</div>
-                      )}
-                    </ul>
-                  </div>
-                  <div className="adding-info">
-                    <h6>THÔNG TIN THÊM</h6>
-                    <div className="row">
-                      <div className="col-md-12">
-                        {/* <div className="active">
+                  <div className="adding-info-business-hour">
+                    <div className="business-hour">
+                      <h6>GIỜ HOẠT ĐỘNG</h6>
+                      <ul>
+                        {restaurant.businessHours &&
+                        restaurant.businessHours.length > 0 ? (
+                          restaurant.businessHours
+                            .sort((a, b) => a.date - b.date) // Sort the businessHours array by date
+                            .map((businessHour) => (
+                              <li key={businessHour.id}>
+                                <span className="date-of-week">
+                                  {daysOfWeek[businessHour.date]}:{" "}
+                                </span>{" "}
+                                {businessHour.openTime.substring(0, 5)} -{" "}
+                                {businessHour.closeTime.substring(0, 5)}
+                              </li>
+                            ))
+                        ) : (
+                          <div>no available business hour</div>
+                        )}
+                      </ul>
+                    </div>
+                    <div className="adding-info">
+                      <h6>THÔNG TIN THÊM</h6>
+                      <div className="row">
+                        <div className="col-md-12">
+                          {/* <div className="active">
                           <span style={{ marginRight: "5px" }}> <AiOutlineCar /></span>
                           Chỗ đỗ xe
                         </div>
@@ -288,35 +310,35 @@ export class RestaurantDetail extends Component {
                           <span style={{ marginRight: "5px" }}><AiOutlineFundProjectionScreen /></span>
                           Màn chiếu
                         </div> */}
-                        {restaurant && restaurant.extraServices ? (
-                          <>
-                            {extraServiceDefaults.map(
-                              (extraServiceDefault, index) => (
-                                <div
-                                  className={
-                                    restaurant.extraServices.some(
-                                      (item) =>
-                                        item.id === extraServiceDefault.id
-                                    )
-                                      ? "active"
-                                      : "adding-info-item"
-                                  }
-                                  key={extraServiceDefault.id}
-                                >
-                                  {/* {console.log(restaurant.extraServices.some(item => extraServiceDefault.some(obj => obj.id === item.id)))} */}
-                                  <span style={{ marginRight: "5px" }}>
-                                    {iconComponents[extraServiceDefault.id]}
-                                  </span>
-                                  {extraServiceDefault.name}
-                                </div>
-                              )
-                            )}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      {/* <div className="col-md-6">
+                          {restaurant && restaurant.extraServices ? (
+                            <>
+                              {extraServiceDefaults.map(
+                                (extraServiceDefault, index) => (
+                                  <div
+                                    className={
+                                      restaurant.extraServices.some(
+                                        (item) =>
+                                          item.id === extraServiceDefault.id
+                                      )
+                                        ? "active"
+                                        : "adding-info-item"
+                                    }
+                                    key={extraServiceDefault.id}
+                                  >
+                                    {/* {console.log(restaurant.extraServices.some(item => extraServiceDefault.some(obj => obj.id === item.id)))} */}
+                                    <span style={{ marginRight: "5px" }}>
+                                      {iconComponents[extraServiceDefault.id]}
+                                    </span>
+                                    {extraServiceDefault.name}
+                                  </div>
+                                )
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        {/* <div className="col-md-6">
                         <div className="adding-info-item">
                           <span style={{ marginRight: "5px" }}><AiOutlineWifi /></span>
                           Wifi
@@ -338,13 +360,14 @@ export class RestaurantDetail extends Component {
                           Khu vui chơi trẻ em
                         </div>
                       </div> */}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       );
     }
   }

@@ -1,6 +1,6 @@
 const customConfig =  {
     api: {
-        API_BASE_URL: "https://localhost:7154/",
+        API_BASE_URL: "https://localhost:7154",
         ROUTER_BASE_NAME: null,
     },
     app: {

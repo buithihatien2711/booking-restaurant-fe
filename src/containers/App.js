@@ -16,10 +16,10 @@ function App() {
           <Route path={path.LOGIN} element={<Login/>}/>
           <Route path={path.HOME} element={<Home/>} >
             <Route index element={<HomePage/>} />
+            <Route path="/restaurants/:id" element={<RestaurantDetail/>} />
+            
           </Route>
           <Route path={path.NOTFOUND} element={<NotFound/>}/>
-          
-          <Route path='/test' element={<RestaurantDetail/>}/>
           <Route path='/reservation' element={<Reservation/>}/>
           
         </Routes>

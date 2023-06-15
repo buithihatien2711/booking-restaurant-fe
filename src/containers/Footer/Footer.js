@@ -5,7 +5,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-export class Footer extends Component {
+class Footer extends Component {
   render() {
     return (
         <>

@@ -6,7 +6,7 @@ import imgSuiable4 from '../../assets/image/home_service_img4.webp'
 import imgSuiable5 from '../../assets/image/home_service_img5.webp'
 import './SuitableRestaurant.scss'
 
-export class SuitableRestaurant extends Component {
+class SuitableRestaurant extends Component {
   render() {
     return (
         <>

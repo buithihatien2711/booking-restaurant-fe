@@ -4,7 +4,7 @@ import "react-slideshow-image/dist/styles.css";
 import "./SlideShow.scss";
 import { MdClose } from "react-icons/md";
 
-export class SlideShow extends Component {
+class SlideShow extends Component {
     state = {
         isFullScreen: false,
         currentSlide: null,

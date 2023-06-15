@@ -3,15 +3,16 @@ import Slider from '../Slider/Slider'
 import './TopFavorite.scss'
 import { handleGetRestaurantApi } from '../../services/restaurantService'
 
-export class TopFavorite extends Component {
+class TopFavorite extends Component {
   state = {
     restaurants : []
   }
 
   async componentDidMount() {
     let filter = 'top-favorite'
+    let page = 1
     try {
-      let res = await handleGetRestaurantApi(filter)
+      let res = await handleGetRestaurantApi(filter, page)
       console.log(res.data.data)
       this.setState({
         restaurants : res && res.data && res.data.data ? res.data.data : null

@@ -7,7 +7,7 @@ import imgCuisine4 from '../../assets/image/home_location_img4.webp'
 import imgCuisine5 from '../../assets/image/home_location_img5.webp'
 import imgCuisine6 from '../../assets/image/home_location_img6.webp'
 
-export class Cuisine extends Component {
+class Cuisine extends Component {
     render() {
         return (
             <>

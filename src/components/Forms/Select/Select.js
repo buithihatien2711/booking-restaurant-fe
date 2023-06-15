@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
 import './Select.scss'
-export class Select extends Component {
-  render() {
-    const data = this.props.data
-    const defaultValue = {
-        id: 0,
-        name: this.props.defaultValue
+
+class Select extends Component {
+    handleOnChange = (event) => {
+        const selectedValue = event.target.value
+        // console.log('event', event.target.value)
+        const {onChange} = this.props
+        if (onChange) {
+            onChange(selectedValue);
+        }
+        // this.props.onChange(selectedValue)
     }
-    const options = [defaultValue, ...data]
-    return (
-        <select className='select-input'>
-            {
-                options.map((item) => (
-                    <option value={item.id}>{item.name}</option>
-                ))
-            }
-        </select>
-    )
-  }
+
+    render() {
+        const data = this.props.data
+        const defaultValue = {
+            id: 'default',
+            name: this.props.defaultValue
+        }
+        const options = [defaultValue, ...data]
+        return (
+            <select className='select-input' onChange={(event) => this.handleOnChange(event)}>
+                {
+                    options.map((item) => (
+                        <option value={item.id} key={item.id}>{item.name}</option>
+                    ))
+                }
+            </select>
+        )
+    }
 }
 
 export default Select

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import RestaurantItem from '../Restaurant/RestaurantItem';
+import { withRouter } from '../../hoc/withRouter';
 
-export class Slider extends Component {
+class Slider extends Component {
   // state = {
   //   restaurants : []
   // }

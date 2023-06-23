@@ -1,0 +1,94 @@
+@import '../../../styles/variable';
+
+.restaurant-register {
+    width: 100%;
+    height: 100%;
+    // background-position: center;
+    // background-size: cover;
+    // background-image: url('../../../assets/image/bg-owner-login.jpg');
+    background-color: $common-red-bg;
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+
+    .restaurant-register-form {
+        width: 80%;
+        height: auto;
+        background-color: #fff;
+        margin: auto;
+        padding: 20px;
+        border-radius: 7px;
+
+        .title {
+            text-align: center;
+            font-weight: 600;
+            font-size: 24px;
+            // padding-top: 10px;
+        }
+
+        .row {
+            margin-bottom: 30px;
+        }
+
+        input {
+            border-radius: 7px;
+            border-color: $common-grey;
+            border-width: 1.5px;
+        
+            padding: 7px;
+            width: 100%;
+        
+            &:focus {
+                outline: none;
+            }
+        }
+
+        textarea {
+            border-radius: 7px;
+            border-color: $common-grey;
+            border-width: 1.5px;
+        
+            padding: 7px;
+            width: 100%;
+            height: 100%;
+        
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .register-btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .btn-register {
+                // width: 100%;
+                padding: 0px 30px;
+                margin: 10px 0;
+                height: 35px;
+                border-radius: 15px;
+                outline: none;
+                border: none;
+                background: $common-red;
+                color: white;
+                font-size: 16px;
+    
+                &:hover {
+                    background-color: $common-light-red;
+                }
+            }
+        }
+
+        .select-container {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+
+            .select-item {
+                display: flex;
+                width: fit-content;
+                margin: 10px;
+            }
+        }
+    }
+}

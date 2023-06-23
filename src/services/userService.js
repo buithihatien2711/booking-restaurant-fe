@@ -1,7 +1,19 @@
-import axios from 'axios'
+import axios from "axios";
+import customConfig from "../config";
 
-const handleLoginApi = (userPhone, userPassword) => {
-    return axios.post('https://localhost:7154/api/Auth/login', {phone : userPhone, password : userPassword})
+const apiBaseUrl = customConfig.api.API_BASE_URL;
+
+const handleLoginApi = (userPhone, userPassword, userRole) => {
+  const user = {
+    phone: userPhone,
+    password: userPassword,
+  };
+
+  return axios.post(`${apiBaseUrl}/api/Auth/login?role=${userRole}`, user);
+};
+
+const handleRegisterApi = (user) => {
+  return axios.post(`${apiBaseUrl}/api/Auth/register`, user);
 }
 
-export { handleLoginApi }
+export { handleLoginApi, handleRegisterApi };

@@ -1,0 +1,77 @@
+@import '../../../../styles/variable';
+
+.manage-reservation {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 7px;
+    width: 100%;
+    height: 100%;
+    
+    .filter {
+        .date-input {
+            border-radius: 7px;
+            border-color: $common-grey;
+            border-width: 2px;
+        
+            padding: 0px 7px;
+            width: 100%;
+            // height: 3rem;
+            height: 100%;
+            
+        
+            &:focus {
+                outline: none;
+            }
+        }
+        .select-status {
+            border-radius: 7px;
+            border-color: $common-grey;
+            border-width: 1.5px;
+        
+            padding: 7px;
+            width: 100%;
+        
+            // text-align: left;
+        
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    .content {
+        margin-top: 10px;
+        .table-content {
+            width: 100%;
+            border-collapse: collapse;
+             
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                border: 1px solid  $common-grey;
+            }
+
+            
+            .select-status-opt {
+                border-radius: 7px;
+                border-color: $common-grey;
+                border-width: 1.5px;
+            
+                padding: 7px;
+                width: 200px;
+                // text-align: left;
+            
+                &:focus {
+                    outline: none;
+                }
+            }
+            
+            a {
+                color: #000;
+                .icon {
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

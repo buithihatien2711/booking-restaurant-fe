@@ -1,0 +1,28 @@
+@import '../styles/variable';
+
+.home-owner-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: $common-red-bg;
+
+    .content-container {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+
+        .nav-bar-container {
+            width:fit-content;
+            height: 100%;
+            flex-shrink: 0;
+        }
+          
+        .content {
+            flex: 1;
+            height: 100%;
+            width: 100%;
+            flex-grow: 1;
+            // overflow-x: scroll;
+        }
+    }
+}

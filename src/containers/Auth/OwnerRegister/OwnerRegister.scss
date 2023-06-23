@@ -1,0 +1,82 @@
+@import '../../../styles/variable';
+
+.owner-register {
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-image: url('../../../assets/image/bg-owner-login.jpg');
+    display: flex;
+    align-items: center;
+
+    .register-form {
+        width: 500px;
+        height: auto;
+        background-color: #fff;
+        margin: auto;
+        padding: 20px;
+        border-radius: 7px;
+
+        .title {
+            text-align: center;
+            font-weight: 600;
+            font-size: 24px;
+            // padding-top: 10px;
+        }
+
+        .custom-input-password {
+            position: relative;
+
+            .icon-eye {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                cursor: pointer;
+            }
+        }
+
+        .row {
+            margin-bottom: 30px;
+        }
+
+        input {
+            border-radius: 7px;
+            border-color: $common-grey;
+            border-width: 1.5px;
+        
+            padding: 7px;
+            width: 100%;
+        
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .register-btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .btn-register {
+                // width: 100%;
+                padding: 0px 30px;
+                margin: 10px 0;
+                height: 35px;
+                border-radius: 15px;
+                outline: none;
+                border: none;
+                background: $common-red;
+                color: white;
+                font-size: 16px;
+    
+                &:hover {
+                    background-color: $common-light-red;
+                }
+            }
+        }
+
+        .message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    }
+}

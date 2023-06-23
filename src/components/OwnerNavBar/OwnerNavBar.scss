@@ -1,0 +1,53 @@
+@import '../../styles/variable';
+
+.navbar-container {
+    width: 250px;
+    height: 100%;
+    // background-color: $common-red;
+    background-color: $common-red-bg;
+    position: relative;
+
+    .close {
+        position: absolute;
+        top: 3px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .menu {
+        list-style: none;
+        padding: 35px 10px;
+        .menu-item {
+            padding: 20px 10px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+
+            &:first-child {
+                margin-top: 0px;
+            }
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+
+            &:hover {
+                // background-color: rgba($color: #fff, $alpha: 0.1);
+                background-color: $common-red;
+                color: #fff;
+                
+            }
+
+            &.active {
+                background-color: rgba($color: #fff, $alpha: 0.3);
+            }
+        }
+    }
+}
+
+.btn-menu {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: rgba($color: #fff, $alpha: 0.3);
+}

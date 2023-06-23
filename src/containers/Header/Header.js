@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import imgLogo from "../../assets/image/logo.png";
+import imgLogo from "../../assets/image/logo-image.png";
 import "./Header.scss";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 import { withRouter } from "../../hoc/withRouter";
 import { path } from "../../utils/constant";
 import Dropdown from "react-bootstrap/Dropdown";
-import Login from "../Auth/Login";
+import Login from "../Auth/UserLogin/Login";
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
@@ -28,12 +28,13 @@ class Header extends Component {
       this.setState({
         isLogin: true,
       });
-    }
-    var decoded = jwt_decode(token);
-    if(decoded.Fullname){
-      this.setState({
-        fullname: decoded.Fullname
-      })
+
+      var decoded = jwt_decode(token);
+      if(decoded.Fullname){
+        this.setState({
+          fullname: decoded.Fullname
+        })
+      }
     }
     // console.log('localStorage: ', localStorage.userToken)
   }
@@ -71,7 +72,7 @@ class Header extends Component {
           <div className="container for-business-container">
             <div className="row">
               <div className="for-business">
-                <a href="/">Dành cho doanh nghiệp</a>
+                <a href={path.OWNERLOGIN}>Dành cho doanh nghiệp</a>
               </div>
             </div>
           </div>

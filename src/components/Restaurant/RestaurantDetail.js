@@ -20,21 +20,23 @@ import { withRouter } from "../../hoc/withRouter";
 import { path } from "../../utils/constant";
 import { GrLocation } from "react-icons/gr";
 import Reservation from "../Reservation/Reservation";
-import Login from "../../containers/Auth/Login";
+import Login from "../../containers/Auth/UserLogin/Login";
 
 class RestaurantDetail extends Component {
   state = {
     restaurant: {},
     businessHours: [],
     setIsReservationVisible: false,
+    setIsLoginVisible: false,
     isLogin: false,
+    
   };
   
   async componentDidMount() {
     window.scrollTo(0, 0);
     // let id = "e5ade534-0a32-40f1-9187-00cab120bb23"; // Get from url
     // let id = '093111eb-f7df-45b5-b726-15ab5f4bf139'
-    console.log('restaurant detail: ', this.props)
+    // console.log('restaurant detail: ', this.props)
     if (this.props.params && this.props.params.id) {
       // console.log('restaurant detail: ', this.props)
       let id = this.props.params.id
@@ -58,9 +60,17 @@ class RestaurantDetail extends Component {
 
   onOpenReserve = () => {
     // alert('onclick reserve');
-    this.setState({
-      setIsReservationVisible: true,
-    });
+    if(this.state.isLogin){
+      this.setState({
+        setIsReservationVisible: true,
+      });
+    }
+    else {
+      this.setState({
+        setIsLoginVisible: true,
+      })
+    }
+
   };
 
   onCloseReserve = () => {
@@ -69,6 +79,12 @@ class RestaurantDetail extends Component {
     });
   };
 
+  onCloseLoginForm = () => {
+    this.setState({
+      setIsLoginVisible: false
+    })
+  }
+
   render() {
     const restaurant = this.state.restaurant;
     // {console.log(restaurant)}
@@ -76,7 +92,7 @@ class RestaurantDetail extends Component {
       // Render loading state or return null
       return <div>Loading...</div>;
     } else {
-      console.log(restaurant);
+      // console.log(restaurant);
       const restaurantImages = this.state.restaurant.restaurantImages;
       const daysOfWeek = [
         "Thứ hai",
@@ -113,13 +129,13 @@ class RestaurantDetail extends Component {
       };
       return (
         <>
-          {this.state.setIsReservationVisible && this.state.isLogin && (
+          {this.state.setIsReservationVisible && (
             <div className="reserve-form">
-              <Reservation onClose={() => this.onCloseReserve()} />
+              <Reservation onClose={() => this.onCloseReserve()} restaurantId = {this.state.restaurant.id}/>
             </div>
           )}
 
-          {this.state.setIsReservationVisible && !this.state.isLogin && (
+          {this.state.setIsLoginVisible && (
             <div className="login-form">
               <Login  onClose={() => this.onCloseLoginForm()} />
             </div>

@@ -35,7 +35,7 @@ button {
             &:hover {
                 background-color: $common-light-red;
                 transition: $smooth;
-                border-radius: 15px;
+                // border-radius: 15px;
             }
         }
     }
@@ -80,6 +80,7 @@ button {
             width: 100px;
             margin-left: 15px;
             font-weight: $bold;
+
         }
 
         .account-auth {

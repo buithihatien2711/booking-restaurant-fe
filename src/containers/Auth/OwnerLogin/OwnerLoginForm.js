@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import "./Login.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from 'react'
+import './OwnerLoginForm.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { handleLoginApi } from "../../services/userService";
-import { Navigate } from "react-router-dom";
-import { withRouter } from "../../hoc/withRouter";
-import { path } from "../../utils/constant";
-import { MdClose } from "react-icons/md";
+import { Link } from 'react-router-dom';
+import { handleLoginApi } from "../../../services/userService";
+import { path } from '../../../utils/constant';
+import { withRouter } from '../../../hoc/withRouter';
 
-class Login extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +33,7 @@ class Login extends Component {
 
     if (this.state.phone === "") {
       this.setState({
-        errValid: "Số điện thoại không được bỏ trống",
+        errValid: "phone không được bỏ trống",
       });
     }
     if (this.state.password === "") {
@@ -45,14 +43,15 @@ class Login extends Component {
     }
     if (this.state.phone === "" && this.state.password === "") {
       this.setState({
-        errValid: "Số điện thoại và mật khẩu không được bỏ trống",
+        errValid: "phone và mật khẩu không được bỏ trống",
       });
     }
 
     try {
-      let res = await handleLoginApi(this.state.phone, this.state.password);
-      localStorage.setItem("userToken", res.data.data);
-      // this.props.navigate(path.HOME);
+      const role = 2
+      let res = await handleLoginApi(this.state.phone, this.state.password, role);
+      localStorage.setItem("ownerToken", res.data.data);
+      this.props.navigate(path.HOMEOWNER);
       window.location.reload()
     } catch (error) {
       this.setState({
@@ -75,11 +74,7 @@ class Login extends Component {
 
   render() {
     return (
-      // <div className='login'>
-      <div className="login-container">
-        <div className="close" onClick={this.props.onClose}>
-          <MdClose />
-        </div>
+      <div className='owner-login-form'>
         <div className="login-content row">
           <div className="col-12 text-login">Đăng nhập</div>
           <div className="col-12" style={{ color: "red" }}>
@@ -126,14 +121,17 @@ class Login extends Component {
               Đăng nhập
             </button>
           </div>
-          <div className="col-12">
-            <span className="forgot-password">Quên mật khẩu?</span>
+          <div className="col-12 forget-password">
+            {/* <span className="forgot-password">Quên mật khẩu?</span> */}
+            <Link to='/'>Quên mật khẩu</Link>
+          </div>
+          <div className="col-12 sign-up">
+            Chưa có tài khoản?<Link to='/'>&nbsp;Đăng kí</Link>
           </div>
         </div>
       </div>
-      // {/* </div> */}
-    );
+    )
   }
 }
 
-export default withRouter(Login);
+export default withRouter(LoginForm)

@@ -1,0 +1,29 @@
+@import '../../styles/variable';
+
+.footer {
+    .container {
+        .navbar-group {
+            .navbar-group-title {
+                font-size: $title-small-size;
+                margin: 10px 0px;
+                font-weight: $bold;
+            }
+            ul {
+                list-style: none;
+                padding-left: 0px;
+                li {
+                    padding: 3px 0px;
+                    a {
+                        text-decoration: none;
+                        color: #fff;
+                        
+                        &:hover {
+                            text-decoration: underline;
+                            transition: $smooth;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

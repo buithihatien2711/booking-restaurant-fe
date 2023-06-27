@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./AdvanceSearch.scss";
 import Select from '../Forms/Select/Select'
-import { handleGetCuisinesApi, handleGetServicesApi, handleGetCitiesApi, handleGeDistrictsApi } from "../../services/restaurantService";
+import { handleGetCuisinesApi, handleGetServicesApi, handleGetCitiesApi, handleGetDistrictsApi } from "../../services/restaurantService";
 
 class AdvanceSearch extends Component {
   state = {
@@ -52,7 +52,7 @@ class AdvanceSearch extends Component {
     console.log('handleSelectChange: ', selectedValue);
     try {
       let id =  selectedValue
-      var res = await handleGeDistrictsApi(id)
+      var res = await handleGetDistrictsApi(id)
       console.log(res.data)
       this.setState({
         districts : res && res.data ? res.data.data : []

@@ -25,16 +25,36 @@ const handleGetSuitabilitiesApi = () => {
   return axios.get(`${apiBaseUrl}/api/Suitability`);
 };
 
+const handleGetExtraServicesApi = () => {
+  return axios.get(`${apiBaseUrl}/api/ExtraService`);
+};
+
 const handleGetCitiesApi = () => {
   return axios.get(`${apiBaseUrl}/api/Location/cities`);
 };
 
-const handleGeDistrictsApi = (id) => {
+const handleGetDistrictsApi = (id) => {
   return axios.get(`${apiBaseUrl}/api/Location/cities/${id}`);
 };
 
+const handleGetWardsApi = (id) => {
+  return axios.get(`${apiBaseUrl}/api/Location/districts/${id}`);
+};
+
 const handleGetRestaurantIdByUserId = (idUser) => {
-  return axios.get(`https://localhost:7154/api/Restaurant/user/${idUser}`)
+  return axios.get(`${apiBaseUrl}/api/Restaurant/user/${idUser}`)
+}
+
+const handleUploadImage = (userId, typeImage, images) => {
+  return axios.post(`${apiBaseUrl}/api/Image?typeImage=${typeImage}&userId=${userId}`, images, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+}
+
+const handleAddRestaurant = (userId, restaurant) => {
+  return axios.post(`${apiBaseUrl}/api/Restaurant?userId=${userId}`, restaurant)
 }
 
 export {
@@ -43,8 +63,12 @@ export {
   handleGetCuisinesApi,
   handleGetServicesApi,
   handleGetCitiesApi,
-  handleGeDistrictsApi,
+  handleGetDistrictsApi,
   handleGetRestaurantIdByUserId,
   handleGetSuitabilitiesApi,
-
+  handleGetExtraServicesApi,
+  handleGetWardsApi,
+  handleUploadImage,
+  handleAddRestaurant, 
+  
 };

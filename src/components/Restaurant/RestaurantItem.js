@@ -39,16 +39,20 @@ class RestaurantItem extends Component {
                         {restaurant.location.address}, P.{restaurant.ward.name}, Q.{restaurant.district.name}, {restaurant.city.name}
                     </div>
                     <div className="product-type-price">
-                        <div className="product-type">
-                            <span>
-                                <a href="/">{restaurant.cuisines[0].name}</a>
-                            </span>
-                        </div>
-                        <div className='product-service'>
-                            <span>
-                                <a href="/">{restaurant.services[0].name}</a>
-                            </span>
-                        </div>
+                        {restaurant.cuisines && restaurant.cuisines[0] && (
+                            <div className="product-type">
+                                <span>
+                                    <a href="/">{restaurant.cuisines[0].name}</a>
+                                </span>
+                            </div>
+                        )}
+                        {restaurant.services && restaurant.services[0] && (
+                            <div className='product-service'>
+                                <span>
+                                    <a href="/">{restaurant.services[0].name}</a>
+                                </span>
+                            </div>
+                        )}
                         <div className="product-price">
                             <span className="product-price-content">{Array(restaurant.priceRange).fill('$').join('')}</span>
                             <span>{Array(5 - restaurant.priceRange).fill('$').join('')}</span>

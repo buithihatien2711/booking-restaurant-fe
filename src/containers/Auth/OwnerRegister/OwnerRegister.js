@@ -4,6 +4,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handleRegisterApi } from "../../../services/userService"
 import Select from '../../../components/Forms/Select/Select';
+import { withRouter } from '../../../hoc/withRouter';
+import { path } from '../../../utils/constant';
 
 export class OwnerRegister extends Component {
   state = {
@@ -51,18 +53,25 @@ export class OwnerRegister extends Component {
         password: this.state.password,
         confirmPassword: this.state.confirmPassword,
         email: this.state.email,
-        role: 3
+        role: 2
       }
 
       let res = await handleRegisterApi(user)
 
-      // console.log('>>> res: ',res.data.data)
+      console.log('>>> res: ',res.data.data)
       localStorage.setItem("ownerToken", res.data.data);
-
+      this.props.navigate(path.RESTAURANTREGISTER)
+      window.location.reload()
     } catch (error) {
-      this.setState({
-        message: error
-      })
+      if (error.response && error.response.data && error.response.data.errorMessage) {
+        this.setState({
+          message: error.response.data.errorMessage
+        });
+      } else {
+        this.setState({
+          message: 'An error occurred.'
+        });
+      }
     }
 
   }
@@ -160,4 +169,4 @@ export class OwnerRegister extends Component {
   }
 }
 
-export default OwnerRegister
+export default withRouter(OwnerRegister)

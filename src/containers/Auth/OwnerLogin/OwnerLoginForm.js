@@ -126,7 +126,7 @@ class LoginForm extends Component {
             <Link to='/'>Quên mật khẩu</Link>
           </div>
           <div className="col-12 sign-up">
-            Chưa có tài khoản?<Link to='/'>&nbsp;Đăng kí</Link>
+            Chưa có tài khoản?<Link to={path.OWNERREGISTER}>&nbsp;Đăng kí</Link>
           </div>
         </div>
       </div>

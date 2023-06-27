@@ -48,6 +48,7 @@ class RestaurantDetail extends Component {
         });
       } catch (error) {
         this.props.navigate(path.NOTFOUND)
+        window.location.reload()
         // console.log(error);
       }
     }

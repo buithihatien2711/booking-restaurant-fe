@@ -27,7 +27,7 @@ function App() {
         <Routes>
           <Route path={path.OWNERLOGIN} element={<OwnerLogin />} />
           <Route path={path.OWNERREGISTER} element={<OwnerRegister />} />
-          <Route path={'/register/restaurant'} element={<RestaurantRegister/>} />
+          <Route path={path.RESTAURANTREGISTER} element={<RestaurantRegister/>} />
 
           <Route path={path.HOMEOWNER} element={<HomeOwner />}>
             <Route index element={<OwnerHomepage />} />

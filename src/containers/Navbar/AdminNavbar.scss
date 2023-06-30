@@ -1,6 +1,6 @@
 @import '../../styles/variable';
 
-.navbar-container {
+.admin-navbar-container {
     width: 250px;
     height: 100%;
     // background-color: $common-red;
@@ -17,6 +17,10 @@
     .menu {
         list-style: none;
         padding: 35px 10px;
+        a {
+            text-decoration: none;
+            color: #000;
+        }
         .menu-item {
             padding: 20px 10px;
             border-radius: 15px;
@@ -33,15 +37,15 @@
 
             &:hover {
                 // background-color: rgba($color: #fff, $alpha: 0.1);
-                background-color: $common-red;
+                background-color: $common-light-red;
                 color: #fff;
                 
             }
 
             &.active {
-                background-color: rgba($color: #fff, $alpha: 0.3);
-                // background-color: $common-red;
-                // color: #fff;
+                // background-color: rgba($color: #fff, $alpha: 0.3);
+                background-color: $common-red;
+                color: #fff;
             }
         }
     }

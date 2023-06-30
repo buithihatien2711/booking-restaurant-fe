@@ -1,0 +1,209 @@
+@import '../../../../styles/variable';
+
+.restaurant-admin-detail {
+    background-color: $common-grey;
+    padding: 20px 0px;
+    position: relative;
+    .container {
+        .back {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            .icon-back {
+                margin-right: 10px;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .content {
+            .intro {
+                padding: 20px 20px;
+                border-radius: 7px;
+                background-color: #fff;
+                .restaurant-image {
+                    display: flex;
+                    align-items: stretch;
+                    .main-image {
+                        flex: 1;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 7px;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .other-image {
+                        display: flex;
+                        flex-direction: column;
+                        
+                        .other-image-item {
+                            flex: 1;
+                            margin-bottom: 10px;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 7px;
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+
+                            &:last-child {
+                                position: relative;
+                                text-align: center;
+                                margin-bottom: 0px;
+
+                                .photo-overlay {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100v;
+                                    height: 100%;
+                                    background-color: rgba(0, 0, 0, 0.5);
+                                    border-radius: 7px;
+
+                                    // width: 100vw;
+                                    // height: 100vh;
+                                    box-sizing: border-box;
+                                }
+
+                                .text-centered {
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%);
+                                    font-weight: 600;
+                                    font-size: $base-size;
+                                    color: #fff;
+                                    z-index: 5;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .intro-text {
+                    h4 {
+                        font-weight: $title-weight;
+                    }
+                    .location {
+                        .icon-location {
+                            margin-right: 10px;
+                        }
+                        .line {
+                            margin-top: 10px;
+                            width: 100%;
+                            height: 1.5px;
+                            background-color: $common-grey;
+                            margin-bottom: 10px;
+                        }
+                    }
+                    .tag {
+                        display: flex;
+                        .tag-item {
+                            // list-style: none;
+                            border-style: solid;
+                            border-color: $common-grey;
+                            border-width: 2px;
+                            padding: 5px 15px;
+                            border-radius: 20px;
+                            
+                            margin: 10px 10px;
+                            &:first-child{
+                                margin-right: 10px;
+                            }
+                            &:first-left{
+                                margin-right: 10px;
+                            }
+                            &:hover {
+                                border-color: $common-red;
+                            }
+
+                            a {
+                               text-decoration: none;
+                               color: #000;
+                            }
+                        }
+                    }
+                }
+            }
+            .description {
+                padding: 45px 20px;
+                border-radius: 7px;
+                background-color: #fff;
+                margin: 25px 0px;
+            }
+            .menu {
+                padding: 70px;
+                border-radius: 7px;
+                background-color: #fff;
+            }
+        }
+        .extra-info {
+            .action {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 7px;
+                text-align: center;
+                font-weight: 600;
+                margin-bottom: 20px;
+
+                .btn-action {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 15px;
+                    button {
+                        background-color: $common-red;
+                        color: #fff;
+                        padding: 10px 20px;
+                        // width: 100%;
+                        align-self: center;
+                        border-radius: 7px;
+                        font-weight: $bold;
+                        font-size: 16px;
+                    }
+                    .btn-confirm {
+                        background-color: #00a632;
+                        border-color: #00a632;
+                    }
+                }
+            }
+            .adding-info-business-hour {
+                padding: 10px 20px;
+                border-radius: 7px;
+                background-color: #fff;
+                // margin: 20px 0px;
+                .business-hour {
+                    ul {
+                        li {
+                            .date-of-week {
+                                font-weight: $bold;
+                            }
+                        }
+                    }
+                }
+                .adding-info {
+                    .adding-info-item {
+                        color: #d2d2d2;
+                        margin-bottom: 10px;
+                    }
+                    .active {
+                        color: #000;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

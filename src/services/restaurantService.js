@@ -57,6 +57,43 @@ const handleAddRestaurant = (userId, restaurant) => {
   return axios.post(`${apiBaseUrl}/api/Restaurant?userId=${userId}`, restaurant)
 }
 
+const handleGetRestaurantsAdmin = (pageIndex, status) => {
+  return axios.get(`${apiBaseUrl}/api/Restaurant/admin/restaurants/${pageIndex}?status=${status}`)
+}
+
+const handleGetRestaurantsFilter = (city, district, price, cuisine, service, suitability, sort, page) => {
+  let url = `${apiBaseUrl}/api/Restaurant/filter?`;
+  if (city) {
+    url += `City=${city}&`;
+  }
+  if (district) {
+    url += `District=${district}&`;
+  }
+  if (price) {
+    url += `PriceRange=${price}&`;
+  }
+  if (cuisine) {
+    url += `Cuisine=${cuisine}&`;
+  }
+  if (service) {
+    url += `Service=${service}&`;
+  }
+  if (suitability) {
+    url += `Suitability=${suitability}&`;
+  }
+  if (sort) {
+    url += `Sort=${sort}&`;
+  }
+  if (page) {
+    url += `pageIndex=${page}&`;
+  }
+  // Remove the trailing '&' character if no parameters were included
+  if (url.endsWith("&")) {
+    url = url.slice(0, -1);
+  }
+  return axios.get(url)
+}
+
 export {
   handleGetRestaurantApi,
   handleGetRestaurantDetailApi,
@@ -70,5 +107,7 @@ export {
   handleGetWardsApi,
   handleUploadImage,
   handleAddRestaurant, 
-  
+  handleGetRestaurantsAdmin,
+  handleGetRestaurantsFilter,
+
 };
